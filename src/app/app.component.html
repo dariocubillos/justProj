@@ -20,7 +20,7 @@
                 <a class="navbar-brand js-scroll-trigger" href="#page-top">Sistema Justificantes</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
-                    <i class="fas fa-bars"></i>
+                    <i class="fa fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
@@ -41,7 +41,7 @@
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fa fa-home"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
@@ -56,7 +56,7 @@
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fa fa-check"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Portfolio Grid Items-->
@@ -65,7 +65,7 @@
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                                <div class="portfolio-item-caption-content text-center text-white"><i class="fa fa-plus fa-3x"></i></div>
                             </div>
                             <img class="img-fluid" src="assets/img/portfolio/cabin.png" alt="" />
                         </div>
@@ -74,7 +74,7 @@
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                                <div class="portfolio-item-caption-content text-center text-white"><i class="fa fa-plus fa-3x"></i></div>
                             </div>
                             <img class="img-fluid" src="assets/img/portfolio/cake.png" alt="" />
                         </div>
@@ -83,7 +83,7 @@
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                                <div class="portfolio-item-caption-content text-center text-white"><i class="fa fa-plus fa-3x"></i></div>
                             </div>
                             <img class="img-fluid" src="assets/img/portfolio/circus.png" alt="" />
                         </div>
@@ -110,8 +110,8 @@
                 <!-- About Section Button-->
                 <div class="text-center mt-4">
                     <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/themes/freelancer/">
-                        <i class="fas fa-download mr-2"></i>
-                        Ingresar!
+                        <i class="fa fa-arrow-circle-o-right"></i>
+                        Ingresar
                     </a>
                 </div>
             </div>
@@ -124,45 +124,45 @@
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fa fa-user-o"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Contact Section Form-->
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                        <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                        <form id="contactForm" name="sentMessage" novalidate="novalidate" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
                           <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Nombre completo</label>
-                                <input class="form-control" id="namefull" type="text" placeholder="Nombre completo" required="required" />
+                                <input class="form-control" id="nameFull" formControlName="nameFull" type="text" placeholder="Nombre completo" required="required" />
                                 <p class="help-block text-danger"></p>
                             </div>
                           </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Nombre de usuario</label>
-                                    <input class="form-control" id="name" type="text" placeholder=" Nombre de usuario" required="required" />
+                                    <input class="form-control" id="nameUser" formControlName="nameUser" type="text" placeholder=" Nombre de usuario" required="required" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Contraseña</label>
-                                    <input class="form-control" id="password" type="password" placeholder="Contraseña" required="required" />
+                                    <input class="form-control" id="password"  formControlName="password" type="password" placeholder="Contraseña" required="required" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Numero de telefono</label>
-                                    <input class="form-control" id="phone" type="tel" placeholder="Phone Number" required="required" />
+                                    <input class="form-control" id="phone" type="number" formControlName="phone" placeholder="Numero de telefono (ejemplo: 924100123)" required="required" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <br />
                             <div id="success"></div>
-                            <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Registrarme</button></div>
+                            <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit" >Registrarme</button></div>
                         </form>
                     </div>
                 </div>
@@ -212,7 +212,7 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
                     </button>
                     <div class="modal-body text-center">
                         <div class="container">
@@ -231,7 +231,7 @@
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
-                                        <i class="fas fa-times fa-fw"></i>
+                                        <i class="fa fa-times fa-fw"></i>
                                         Close Window
                                     </button>
                                 </div>
@@ -246,7 +246,7 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
                     </button>
                     <div class="modal-body text-center">
                         <div class="container">
@@ -265,7 +265,7 @@
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
-                                        <i class="fas fa-times fa-fw"></i>
+                                        <i class="fa fa-times fa-fw"></i>
                                         Close Window
                                     </button>
                                 </div>
@@ -280,7 +280,7 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
                     </button>
                     <div class="modal-body text-center">
                         <div class="container">
@@ -299,7 +299,7 @@
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
-                                        <i class="fas fa-times fa-fw"></i>
+                                        <i class="fa fa-times fa-fw"></i>
                                         Close Window
                                     </button>
                                 </div>
@@ -314,7 +314,7 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
                     </button>
                     <div class="modal-body text-center">
                         <div class="container">
@@ -333,7 +333,7 @@
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
-                                        <i class="fas fa-times fa-fw"></i>
+                                        <i class="fa fa-times fa-fw"></i>
                                         Close Window
                                     </button>
                                 </div>
@@ -348,7 +348,7 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
                     </button>
                     <div class="modal-body text-center">
                         <div class="container">
@@ -367,7 +367,7 @@
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
-                                        <i class="fas fa-times fa-fw"></i>
+                                        <i class="fa fa-times fa-fw"></i>
                                         Close Window
                                     </button>
                                 </div>
@@ -382,7 +382,7 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
                     </button>
                     <div class="modal-body text-center">
                         <div class="container">
@@ -401,7 +401,7 @@
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
-                                        <i class="fas fa-times fa-fw"></i>
+                                        <i class="fa fa-times fa-fw"></i>
                                         Close Window
                                     </button>
                                 </div>
