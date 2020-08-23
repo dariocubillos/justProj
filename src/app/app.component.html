@@ -24,20 +24,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Instruciones</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Ingresar</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
+                        <li *ngIf="loginPage" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Instruciones</a></li>
+                        <li *ngIf="loginPage" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Ingresar</a></li>
+                        <li *ngIf="loginPage" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Registro</a></li>
+                        <li *ngIf="!loginPage" class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
         <header class="masthead bg-primary text-white text-center">
             <div class="container d-flex align-items-center flex-column">
                 <!-- Masthead Avatar Image-->
-                <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" />
+                <img *ngIf="loginPage" class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" />
                 <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">Justificantes-Inicio</h1>
+                <h1 *ngIf="loginPage" class="masthead-heading text-uppercase mb-0">Justificantes-Inicio</h1>
+                <h1 *ngIf="!loginPage" class="masthead-heading text-uppercase mb-0">Subir Justificante</h1>
+
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
@@ -45,9 +47,23 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Sube tu justificante y consigue pronta respuesta!</p>
+                <p *ngIf="loginPage" class="masthead-subheading font-weight-light mb-0">Sube tu justificante y consigue pronta respuesta!</p>
+
+                <p *ngIf="!loginPage" class="masthead-subheading font-weight-light mb-0">Aqui podras subir tus justificantes y consultar su estado.</p>
+                <br>
+                <br>
+                <br>
+                <div class="form-group" *ngIf="!loginPage">
+                    <button class="btn btn-secondary mr-2" id="uploadJust" data-toggle="modal" data-target="#uploadJustModal">
+                     Subir justificante
+                    </button>
+                    <button class="btn btn-secondary" id="checkJust">
+                     Consultar justificante
+                    </button>
+                </div>
             </div>
         </header>
+        <div *ngIf="loginPage">
         <!-- Portfolio Section-->
         <section class="page-section portfolio" id="portfolio">
             <div class="container">
@@ -109,9 +125,9 @@
                 </div>
                 <!-- About Section Button-->
                 <div class="text-center mt-4">
-                    <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/themes/freelancer/">
+                    <a class="btn btn-secondary btn-xl portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4" >
                         <i class="fa fa-arrow-circle-o-right"></i>
-                        Ingresar
+                        Inicia sesión
                     </a>
                 </div>
             </div>
@@ -131,7 +147,7 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                        <form id="contactForm" name="sentMessage" novalidate="novalidate" [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+                        <form id="contactForm" name="sentMessage" novalidate="novalidate" [formGroup]="checkoutForm" (ngSubmit)="registerUser(checkoutForm.value)">
                           <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Nombre completo</label>
@@ -149,7 +165,7 @@
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Contraseña</label>
-                                    <input class="form-control" id="password"  formControlName="password" type="password" placeholder="Contraseña" required="required" />
+                                    <input class="form-control" id="password" formControlName="password" type="password"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -168,44 +184,7 @@
                 </div>
             </div>
         </section>
-        <!-- Footer-->
-        <footer class="footer text-center">
-            <div class="container">
-                <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Ubicacion</h4>
-                        <p class="lead mb-0">
-                            Direccion de la escuela u oficina encargada del software.
-                            <br />
-                            Encargado.
-                        </p>
-                    </div>
-                    <!-- Footer Social Icons-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Redes sociales del departamento</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fa fa-facebook"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fa fa-instagram"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fa fa-twitter"></i></a>
-                    </div>
-                    <!-- Footer About Text-->
-                    <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">Acerca del proyecto</h4>
-                        <p class="lead mb-0">
-                          Esta plataforma esta destinada al beneficio de los estudiantes para automatizar sus tramites.                            .
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Copyright Section-->
-        <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright © Your Website 2020</small></div>
-        </div>
-        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-        <div class="scroll-to-top d-lg-none position-fixed">
-            <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
-        </div>
+    
         <!-- Portfolio Modals-->
         <!-- Portfolio Modal 1-->
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
@@ -321,21 +300,46 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal4Label">Controller</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal4Label">Iniciar Sesión</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="" />
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" data-dismiss="modal">
-                                        <i class="fa fa-times fa-fw"></i>
-                                        Close Window
-                                    </button>
+
+                                    <div>                                        
+                                      <!-- Portfolio Modal - Image-->
+                                      <img class="img-fluid rounded mb-5" src="assets/img/user.png" width="300" height="400"/>
+                                      <!-- Portfolio Modal - Text-->
+                                      <p class="mb-5">
+                                        <form id="loginForm" name="sentMessage" novalidate="novalidate" [formGroup]="loginForm" (ngSubmit)="checkUser(loginForm.value)">
+                                              <div class="control-group">
+                                                  <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                      <label>Nombre de usuario</label>
+                                                      <input class="form-control" id="nameUserLogin" formControlName="nameUser" type="text" placeholder=" Nombre de usuario" required="required" />
+                                                      <p class="help-block text-danger"></p>
+                                                  </div>
+                                              </div>
+                                              <div class="control-group">
+                                                  <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                      <label>Contraseña</label>
+                                                      <input class="form-control" id="passwordUserLogin"  formControlName="password" type="password" placeholder="Contraseña" required="required" />
+                                                      <p class="help-block text-danger"></p>
+                                                  </div>
+                                              </div>
+                                              <br />
+                                              <div id="success"></div>
+                                              <div class="form-group">
+                                                  <button class="btn btn-primary mr-2" id="sendlogin" type="submit">
+                                                    Ingresar
+                                                  </button>
+                                                  <button class="btn btn-primary" data-dismiss="modal">
+                                                    Cerrar ventana
+                                                </button>
+                                            </div>  
+                                          </form>
+                                    </div>                                                                 
                                 </div>
                             </div>
                         </div>
@@ -411,6 +415,124 @@
                 </div>
             </div>
         </div>
+        </div>
+        <div *ngIf="!loginPage">
+                <!-- Portfolio Modal 1-->
+                <div class="portfolio-modal modal fade" id="uploadJustModal" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                            </button>
+                            <div class="modal-body text-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-8">
+                                            <!-- Portfolio Modal - Title-->
+                                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Subir Justificante</h2>
+                                            <!-- Icon Divider-->
+                                            <div class="divider-custom">
+                                                <div class="divider-custom-line"></div>
+                                                <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
+                                                <div class="divider-custom-line"></div>
+                                            </div>
+                                            <!-- Portfolio Modal - Image-->
+                                            <form id="justForm" name="sentJust" novalidate="novalidate" [formGroup]="justForm" (ngSubmit)="saveJust(justForm.value)">
+                                                <div class="control-group">
+                                                  <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                      <label>Archivo</label>
+                                                      <input class="form-control" id="fileJust" type="file"  placeholder="Archivo"
+                                                      (change)="onFileChange($event)" multiple/>
+                                                    <p class="help-block text-danger"></p>
+                                                  </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                      <label>Fecha Inicio</label>
+                                                      <input class="form-control" id="startDate" formControlName="startDate" type="date" placeholder="Fecha inicio"/>
+                                                      <p class="help-block text-danger"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                      <label>Fecha final</label>
+                                                      <input class="form-control" id="endDate" formControlName="endDate" type="date" placeholder="Fecha fin"/>
+                                                      <p class="help-block text-danger"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                  <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                      <label>Motivo</label>
+                                                      <input class="form-control" id="reason" formControlName="reason" type="text" placeholder="Motivo"/>
+                                                      <p class="help-block text-danger"></p>
+                                                  </div>
+                                                </div>
+                                                  <div class="control-group">
+                                                      <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                          <label>Informacion adicional (opcional)</label>
+                                                          <input class="form-control" id="infoExtra" formControlName="infoExtra" type="text" placeholder="Informacion"/>
+                                                          <p class="help-block text-danger"></p>
+                                                      </div>
+                                                  </div>
+                                                  <br>
+                                                  <div class="form-group">
+                                                      <button class="btn btn-primary mr-2">
+                                                          <i class="fa fa-arrow-up fa-fw"></i>
+                                                          Subir
+                                                      </button>
+                                                      <button class="btn btn-primary" data-dismiss="modal">
+                                                          <i class="fa fa-times fa-fw"></i>
+                                                          Cancelar
+                                                      </button>
+                                                  </div>      
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            <!-- Footer-->
+            <footer class="footer text-center">
+                <div class="container">
+                    <div class="row">
+                        <!-- Footer Location-->
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+                            <h4 class="text-uppercase mb-4">Ubicacion</h4>
+                            <p class="lead mb-0">
+                                Direccion de la escuela u oficina encargada del software.
+                                <br />
+                                Encargado.
+                            </p>
+                        </div>
+                        <!-- Footer Social Icons-->
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+                            <h4 class="text-uppercase mb-4">Redes sociales del departamento</h4>
+                            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fa fa-facebook"></i></a>
+                            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fa fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fa fa-twitter"></i></a>
+                        </div>
+                        <!-- Footer About Text-->
+                        <div class="col-lg-4">
+                            <h4 class="text-uppercase mb-4">Acerca del proyecto</h4>
+                            <p class="lead mb-0">
+                              Esta plataforma esta destinada al beneficio de los estudiantes para automatizar sus tramites.                            .
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Copyright Section-->
+            <div class="copyright py-4 text-center text-white">
+                <div class="container"><small>Copyright © Your Website 2020</small></div>
+            </div>
+            <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+            <div class="scroll-to-top d-lg-none position-fixed">
+                <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+            </div>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>

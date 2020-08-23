@@ -8,10 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MainPanelUserComponent } from './components/main-panel-user/main-panel-user.component';
+import { MainPanelAdminComponent } from './components/main-panel-admin/main-panel-admin.component';
 declare var $: any;
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainPanelUserComponent,
+    MainPanelAdminComponent
   ],
   imports: [
     BrowserModule,

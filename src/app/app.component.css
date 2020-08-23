@@ -2501,13 +2501,13 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #2c3e50;
-  border-color: #2c3e50;
+  background-color: #00a5d8;
+  border-color: #00a5d8;
 }
 .btn-secondary:hover {
   color: #fff;
-  background-color: #1e2b37;
-  border-color: #1a252f;
+  background-color: #0b7494;
+  border-color: #0b7494;
 }
 .btn-secondary:focus, .btn-secondary.focus {
   color: #fff;
@@ -5546,7 +5546,7 @@ a.close.disabled {
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 500px;
-    margin: 1.75rem auto;
+    margin: 0.25rem auto;
   }
 
   .modal-dialog-scrollable {
