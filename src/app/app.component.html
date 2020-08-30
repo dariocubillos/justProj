@@ -38,7 +38,9 @@
                 <img *ngIf="loginPage" class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" />
                 <!-- Masthead Heading-->
                 <h1 *ngIf="loginPage" class="masthead-heading text-uppercase mb-0">Justificantes-Inicio</h1>
-                <h1 *ngIf="!loginPage" class="masthead-heading text-uppercase mb-0">Subir Justificante</h1>
+                <h1 *ngIf="!loginPage && alumn" class="masthead-heading text-uppercase mb-0">Subir Justificante</h1>
+
+                <h1 *ngIf="!loginPage && !alumn" class="masthead-heading text-uppercase mb-0">Justificantes-Revisión</h1>
 
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
@@ -49,16 +51,23 @@
                 <!-- Masthead Subheading-->
                 <p *ngIf="loginPage" class="masthead-subheading font-weight-light mb-0">Sube tu justificante y consigue pronta respuesta!</p>
 
-                <p *ngIf="!loginPage" class="masthead-subheading font-weight-light mb-0">Aqui podras subir tus justificantes y consultar su estado.</p>
+                <p *ngIf="!loginPage && alumn" class="masthead-subheading font-weight-light mb-0">Aqui podras subir tus justificantes y consultar su estado.</p>
+                <p *ngIf="!loginPage && !alumn" class="masthead-subheading font-weight-light mb-0">Consulta el justificante de tus alumnos.</p>
+
                 <br>
                 <br>
                 <br>
-                <div class="form-group" *ngIf="!loginPage">
+                <div class="form-group" *ngIf="!loginPage && alumn">
                     <button class="btn btn-secondary mr-2" id="uploadJust" data-toggle="modal" data-target="#uploadJustModal">
                      Subir justificante
                     </button>
                     <button class="btn btn-secondary" id="checkJust" data-toggle="modal" data-target="#uploadJustModalCheck">
                      Consultar justificante
+                    </button>
+                </div>
+                <div class="form-group" *ngIf="!loginPage && !alumn">
+                    <button class="btn btn-secondary" id="checkJust" data-toggle="modal" data-target="#modalCheck">
+                     Revisar justificantes
                     </button>
                 </div>
             </div>
@@ -447,6 +456,15 @@
                                             </div>
                                             <!-- Portfolio Modal - Image-->
                                             <form id="justForm" name="sentJust" novalidate="novalidate" [formGroup]="justForm" (ngSubmit)="saveJust(justForm.value)">
+                                                <label class="mb-2"> Seleccione el mestro</label>
+                                                <div class="control-group">
+                                                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                                        <select class="form-control" id="teacher" formControlName="teacher" type="text" placeholder="Maestro">
+                                                            <option *ngFor="let teach of teachers" [ngValue]="teach.id">{{teach.name}}</option>
+                                                        </select>
+                                                        <p class="help-block text-danger"></p>
+                                                    </div>
+                                                  </div>
                                                 <div class="control-group">
                                                   <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                                       <label>Archivo</label>
@@ -522,7 +540,7 @@
                                             </div>
                                             <!-- Portfolio Modal - Image-->
                                             
-                                            <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered row-border hover">
+                                            <table id="tableAlumn" datatable [dtOptions]="dtOptions" class="table table-striped table-bordered row-border hover">
                                                 <thead>
                                                   <tr>
                                                     <th>Id</th>
@@ -539,7 +557,7 @@
                                                   <tr *ngFor="let just of justs">
                                                     <td>{{ just.id }}</td>
                                                     <td>{{ this.getName() }}</td>
-                                                    <td>{{ just.state }}</td>
+                                                    <td>{{ textStateToEsp(just.state) }}</td>
                                                     <td> <a href="../../../../justMain/justPhp/upload/{{just.filename}}" target="_blank">Imagen</a></td>
                                                     <td>{{ just.dateStart }}</td>
                                                     <td>{{ just.dateEnd }}</td>
@@ -554,6 +572,95 @@
                                                     Cancelar
                                                 </button>
                                                 <button class="btn btn-primary" (click)="reloadJust()">
+                                                    <i class="fa fa-refresh fa-fw"></i>
+                                                    Actualizar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-modal modal fade" id="modalCheck" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                            </button>
+                            <div class="modal-body text-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-12">
+                                            <!-- Portfolio Modal - Title-->
+                                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Estado de los justificantes</h2>
+                                            <!-- Icon Divider-->
+                                            <div class="divider-custom">
+                                                <div class="divider-custom-line"></div>
+                                                <div class="divider-custom-icon"><i class="fa fa-star"></i></div>
+                                                <div class="divider-custom-line"></div>
+                                            </div>
+                                            <!-- Portfolio Modal - Image-->
+                                            
+                                            <table id="tableTeacher" datatable [dtOptions]="dtOptionsTeacher" class="table table-striped table-bordered row-border hover">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Id</th>
+                                                    <th>Usuario</th>
+                                                    <th>Estado</th>
+                                                    <th>Archivo</th>
+                                                    <th>Fecha inicio del permiso</th>
+                                                    <th>Fecha fin del permiso</th>
+                                                    <th>Razon</th>
+                                                    <th>Informacion adicional</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr *ngFor="let just of justsToTeacher">
+                                                    <td>{{ just.id }}</td>
+                                                    <td>{{ just.usernameFk }}</td>
+                                                    <td>{{ textStateToEsp(just.state) }}
+                                                    </td>
+                                                    <td> <a href="../../../../justMain/justPhp/upload/{{just.filename}}" target="_blank">Imagen</a></td>
+                                                    <td>{{ just.dateStart }}</td>
+                                                    <td>{{ just.dateEnd }}</td>
+                                                    <td>{{ just.reason }}</td>
+                                                    <td>{{ just.info }}</td>
+                                                </tr>
+                                                </tbody>
+                                              </table>
+
+
+                                              <div>
+                                                <h1>Permisos</h1>
+                                                <table class="table">
+                                                   <thead>
+                                                      <tr>
+                                                         <th>Id Justificante</th>
+                                                         <th>Nombre</th>
+                                                         <th>Cambio</th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                      <tr *ngFor="let item of justsToTeacherX">
+                                                         <td>{{ item.id }}</td>
+                                                         <td>{{ item.usernameFk }}</td>
+                                                         <td>
+                                                            <button type="button" (click)="chageState(item)">{{textStateChange(item.state)}}</button>
+                                                         </td>
+                                                      </tr>
+                                                   </tbody>
+                                                </table>
+                                             </div>
+
+
+                                            <div class="form-group">
+                                                <button class="btn btn-primary mr-2" data-dismiss="modal">
+                                                    <i class="fa fa-times fa-fw"></i>
+                                                    Cancelar
+                                                </button>
+                                                <button class="btn btn-primary" (click)="reloadJustTeacher()">
                                                     <i class="fa fa-refresh fa-fw"></i>
                                                     Actualizar
                                                 </button>
